@@ -4,7 +4,7 @@ Portal estático de jogos clássicos. A versão publicada no ChatGPT Sites foi s
 
 - **Site:** https://charmandergames.uzinho30.chatgpt.site/
 - **Distribuição executável:** `dist/index.html`, `dist/app.js`, `dist/style.css`, `dist/player.html` e `dist/assets/`.
-- **Catálogo:** 38 itens, incluindo jogos web, Pokémon para emulação, jogos de instalação nativa e projetos comunitários.
+- **Catálogo:** 43 itens: os 38 originais e 5 jogos Pokémon adicionados a partir de arquivos fornecidos pelo usuário.
 - **Configuração Sites:** `.openai/hosting.json`.
 - **Testes da aplicação estática:** `node check.cjs` (execute da raiz); também `node --check dist/app.js`.
 - **Verificação dos perfis de compatibilidade:** `npm test`.
@@ -18,7 +18,11 @@ A integração está feita no código do GitHub e foi validada com `node check.c
 
 ## Emulador e arquivos
 
-O ZIP e o repositório não incluem ROMs comerciais. As ROMs são carregadas pelo visitante, conforme instruções em `docs/SITES-EXPORT-README.md`.
+O ZIP de exportação do portal e o repositório não incluem ROMs comerciais. A aba Pokémon inclui os cinco jogos adicionais: Ultra Violet, Black — Special Palace Edition, Jupiter, Stadium (N64) e Mystery Dungeon: Red Rescue Team. O emulador aceita GB/GBC/GBA/N64 descompactados; Jupiter possui ferramenta local de patch IPS. Os arquivos são selecionados no próprio dispositivo do visitante.
+
+**Atenção:** o ZIP recebido de Pokémon Stadium está truncado e não pode ser utilizado; é necessário um arquivo N64 íntegro. Para Jupiter, o arquivo recebido contém somente o patch IPS, sendo necessária uma ROM-base autorizada de Pokémon Ruby.
+
+Veja `docs/ROM-IMPORT-2026-10-14.md` para o relatório de verificação dos arquivos e `docs/SITES-EXPORT-README.md` para mais detalhes do emulador.
 
 ## Proveniência
 
