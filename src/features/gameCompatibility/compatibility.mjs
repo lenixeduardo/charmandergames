@@ -140,7 +140,18 @@ export function evaluateCompatibility(game, capabilities) {
   ]);
 }
 
+// Reutiliza uma única checagem para todos os cards do catálogo.
+let cachedBrowserCapabilities = null;
+
 export async function checkGameCompatibility(game, environment) {
-  const capabilities = await detectBrowserCapabilities(environment);
-  return evaluateCompatibility(game, capabilities);
+  if (environment) {
+    return evaluateCompatibility(game, await detectBrowserCapabilities(environment));
+  }
+  if (!cachedBrowserCapabilities) {
+    cachedBrowserCapabilities = detectBrowserCapabilities().catch(error => {
+      cachedBrowserCapabilities = null;
+      throw error;
+    });
+  }
+  return evaluateCompatibility(game, await cachedBrowserCapabilities);
 }
