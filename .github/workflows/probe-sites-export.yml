@@ -1,0 +1,20 @@
+name: Verificar acesso ao Sites
+on:
+  push:
+    paths:
+      - .github/workflows/probe-sites-export.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verificar se site e assets estão acessíveis publicamente
+        run: |
+          set -eu
+          for resource in "/" "/app.js" "/style.css" "/assets/logo.svg" "/assets/pokemon-red-cover.jpeg"; do
+            url="https://charmandergames.uzinho30.chatgpt.site${resource}"
+            code=$(curl -L -sS --max-time 20 -o /dev/null -w "%{http_code}" "$url" || true)
+            printf 'Public resource: %s -> HTTP %s\n' "$resource" "$code"
+          done
