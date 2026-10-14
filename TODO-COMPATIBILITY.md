@@ -6,8 +6,8 @@
 - [x] Implementar componente React de referência e testes.
 - [x] **Importar os 53 arquivos da distribuição estática publicada para `main`**, preservando os módulos anteriores.
 - [x] Comparar a distribuição Sites ao ZIP recebido por SHA-256 e registrar divergências.
-- [ ] Integrar os badges diretamente à aplicação real em `dist/app.js` e `dist/style.css` ou realizar migração coordenada do app para React. O site publicado atualmente usa **JavaScript estático**.
-- [ ] Conferir nomes/IDs de todos os cards reais e associar ao perfil técnico correspondente.
+- [x] Integrar os badges na aplicação estática em `dist/app.js`, `dist/style.css` e `dist/compatibility/*.mjs`.
+- [x] Conferir os 38 títulos e associar os perfis, inclusive por nome quando o ID do card difere do registro.
 - [ ] Confirmar manualmente hosts classificados como `tentative` / `unverified`.
 - [ ] Testar responsividade e compatibilidade em Chrome, Edge, Firefox, Safari iOS e Chrome Android.
 - [ ] Publicar uma versão do Sites com os badges integrados e efetuar testes E2E.
