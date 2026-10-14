@@ -79,10 +79,7 @@ jobs:
       - name: Testar rotas, busca, filtros, favoritos e ROMs do site publicado
         run: |
           node --check dist/app.js
-          # A última bateria do check.cjs valida detalhes visuais exclusivos do ZIP,
-          # que não estão presentes na versão publicada; os primeiros dois testes
-          # validam a lógica, seis rotas, busca, favoritos e script de emulação.
-          head -n 2 check.cjs | node
+          node check.cjs
       - name: Commit seguro na main sem remover o módulo de compatibilidade
         shell: bash
         run: |
