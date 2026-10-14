@@ -1,0 +1,47 @@
+name: Importar versão do CharmanderGames Sites
+
+on:
+  push:
+    paths:
+      - .github/workflows/import-sites-static.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Baixar somente os arquivos esperados da origem pública
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="https://charmandergames.uzinho30.chatgpt.site"
+          while read -r expected path; do
+            [[ "$expected" =~ ^[0-9a-f]{64}$ ]] || { echo "Manifest hash inválido"; exit 1; }
+            [[ "$path" == dist/* && "$path" != *..* ]] || { echo "Manifest path inválido"; exit 1; }
+            mkdir -p "$(dirname "$path")"
+            curl --fail --location --silent --show-error --retry 3 --max-time 120 \
+              --output "$path" "$base/${path#dist/}"
+          done < sites-export/dist.sha256
+      - name: Verificar correspondência bit a bit com o ZIP fornecido
+        run: sha256sum --check --strict sites-export/dist.sha256
+      - name: Executar verificações do site estático
+        run: node check.cjs
+      - name: Commit dos arquivos validados sem afetar módulo de compatibilidade
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- dist/
+          if git diff --cached --quiet; then
+            echo "Nenhuma alteração no snapshot."
+          else
+            git commit -m "feat: import exact 38-game Sites static export with verified assets"
+            git push origin HEAD:main
+          fi
