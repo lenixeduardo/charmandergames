@@ -39,3 +39,21 @@ header{height:72px;padding:0 3.2%;gap:16px;border-bottom:0}.brand{font-size:23px
 .hero--catalog .hero-copy{max-width:610px}
 .pokemon-page .sidebar{margin-top:0}
 @media(max-width:600px){.hero--catalog .hero-copy{max-width:100%}}
+
+
+/* Biblioteca de ROMs locais e patches IPS — tela Emulador exclusivamente. */
+.rom-card-note{font:500 10px/1.45 Inter,sans-serif;color:#825210;background:#fff8e8;border:1px solid #f6e3bd;border-radius:5px;padding:6px 7px;margin:8px 0}
+.rom-card-note--alert{color:#9b3833;background:#fff0ed;border-color:#f3d0c9}
+.rom-file-label{display:block;margin:15px 0 5px;color:#535d6a;font-size:12px;font-weight:600}
+#rom-file-id{width:100%;max-width:420px;display:block;margin:0 auto 12px;padding:11px;border:1px solid #e2e4e9;background:white;border-radius:6px;color:#232d3a}
+#rom-upload-status{max-width:480px;margin:12px auto 0}
+.ips-tools{margin:20px 0;padding:22px;border:1px solid #f2dcc0;border-radius:10px;background:#fffaf3}
+.ips-tools[hidden]{display:none!important}
+.ips-tools h2{font-size:19px;margin:0 0 8px}
+.ips-tools>p{font-size:12px;line-height:1.65;color:#606471;max-width:760px}
+.ips-fields{display:flex;flex-wrap:wrap;gap:12px;align-items:end;margin-top:14px}
+.ips-fields label{flex:1 1 240px;display:flex;flex-direction:column;gap:8px;font-size:12px;font-weight:600;color:#3d4655}
+.ips-fields input{max-width:100%;padding:11px;background:white;border:1px solid #e6e2de;border-radius:6px;font-size:11px}
+.ips-fields .btn{min-height:42px}
+#ips-status{margin-top:12px}
+@media(max-width:600px){.ips-tools{padding:15px}.ips-fields{flex-direction:column;align-items:stretch}.ips-fields label{flex:1 1 auto}.rom-card-note{font-size:10px}}
