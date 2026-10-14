@@ -9,7 +9,7 @@ Módulo pronto para integrar ao catálogo React/Vite do CharmanderGames.
 - Badge separado para **plataformas**: Desktop, Desktop + Mobile, Mobile, ou Não verificado.
 - Badge da **verificação local**: Requisitos detectáveis atendidos, Requer configuração, Incompatível ou Não verificado.
 - Detalhamento acessível dos requisitos e eventuais limitações.
-- Perfis de títulos da lista de 25 jogos, 2048, Hextris, OpenTTD e os seis Pokémon do emulador.
+- Perfis para os **38 jogos identificados na versão atual do Sites** (incluindo SuperTux, SuperTuxKart e dois projetos comunitários que não são jogos executáveis).
 - Checagem real das APIs WebAssembly, WebGL 2 e WebGPU quando exigidas, respeitando a impossibilidade de assegurar FPS, RAM livre, arquivos do usuário ou funcionamento de hosts externos.
 - **Sem tentativa de abrir URLs em segundo plano** e sem bloquear botões de jogar apenas por uma estimativa de hardware.
 
@@ -55,3 +55,7 @@ Não use requisitos do jogo nativo como se fossem requisitos de um port WebAssem
 - Catálogo de versões web: https://radiantoptimizer.games/
 
 As classificações dependem da **versão exata do jogo**. Revisar os perfis quando o endereço ou motor do jogo mudar.
+
+## Estado real da sincronização com Sites
+
+A aplicação atual está no projeto Sites `appgprj_6acde5f365408191851872c26a9468f9`. O GitHub inclui o texto projetado da página e o catálogo de 38 títulos, **não o código-fonte completo do site publicado**. Acesse `docs/sites-source-sync-status.md` para o bloqueio de exportação do código original. 
