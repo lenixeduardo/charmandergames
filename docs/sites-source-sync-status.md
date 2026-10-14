@@ -1,33 +1,25 @@
 # CharmanderGames — sincronização Sites → GitHub
 
-Data da inspeção: **2026-10-14**.
+**Atualização: 14/10/2026 — distribuição publicada importada.**
 
-Projeto Sites: `sites-project://appgprj_6acde5f365408191851872c26a9468f9`
+- Projeto Sites: `appgprj_6acde5f365408191851872c26a9468f9`.
+- Publicação: https://charmandergames.uzinho30.chatgpt.site/
+- Repositório: https://github.com/lenixeduardo/charmandergames
+- Commit da importação: `25b247df74c0aa392b3b094db3435deda12151c1`.
 
-Endereço publicado: https://charmandergames.uzinho30.chatgpt.site
+A pasta `dist/` contém **53 arquivos da aplicação publicada**, incluindo **48 assets**, obtidos a partir do endereço público do Sites. Os testes de rotas, busca, filtros, favoritos e ROMs foram executados no GitHub Actions e passaram.
 
-Versão indicada pela projeção da Biblioteca: **source version 4 / projection revision 8** (não equivale a hash Git nem garante data exata da publicação).
+### Comparação com o ZIP fornecido
 
-## O que conseguimos verificar
+O ZIP `CharmanderGames-codigo-fonte(1).zip` foi inspecionado localmente. Os arquivos da versão pública foram comparados por SHA-256: **48 idênticos e 5 diferentes** (`dist/app.js`, `dist/index.html`, `dist/player.html`, `dist/style.css`, `dist/assets/capas/pes-6.webp`). Os hashes completos estão em `sites-export/live-vs-uploaded.md`; manifestos em `sites-export/dist.sha256` e `sites-export/live.sha256`.
 
-- Representação **textual** da página atual registrada pelo Sites: ver `docs/sites-current-page-text.txt`.
-- Catálogo atual de **38 jogos**, extraído dos textos de cards, sem inventar títulos: ver `data/sites-current-catalog.json`.
-- Navegação: Início, Jogos Online, Pokémon, ROM Hacks & Mods, Jogos para Baixar e Emulador.
-- Bloco de status das ROMs de FireRed, LeafGreen e Emerald; no momento da projeção exibiam «ROM não configurada».
-- Catálogo com busca, favoritos, filtros GB/GBC/GBA/Web/PC.
-- Página avisa que ROMs comerciais não são distribuídas.
+A fonte de verdade para a importação solicitada é a **versão publicada no Sites**, não uma combinação potencialmente inconsistente das duas versões.
 
-## Limitação importante
+### Limitações restantes
 
-**Este commit NÃO é o código-fonte da versão publicada no Sites.** O acesso disponível não expõe arquivos JSX/TSX, CSS, configuração Vite, fontes, imagens reais e as demais dependências do projeto que está no editor. O site público também não ficou acessível ao coletor web ou ao container nesta sessão. Portanto seria incorreto alegar que uma cópia exata e compilável do Sites foi sincronizada.
+- O ZIP disponibilizado é uma **exportação estática**, não um projeto React/Vite com JSX/TSX.
+- O módulo de compatibilidade em `src/features/gameCompatibility/` é código separado e **não aparece automaticamente nos cards do `dist/app.js`**.
+- A versão publicada no Sites não foi alterada por este commit; somente o GitHub foi atualizado.
+- Testes reais em diferentes navegadores, especialmente execução de ROMs autorizadas e verificação visual pixel-perfect, continuam pendentes.
 
-O GitHub contém um módulo React de badges de compatibilidade criado separadamente e um registro do catálogo real, mas **não contém** ainda a aplicação do Sites.
-
-## Pendências para conseguir o espelho exato
-
-1. Exportar o projeto **atual** a partir do editor Sites, como arquivo compactado com código-fonte e assets, caso o editor permita essa exportação.
-2. Enviar o ZIP no chat ou disponibilizar a origem diretamente por uma integração com acesso aos arquivos do projeto.
-3. Inspecionar todo o ZIP, reconciliar com `main` e preservar o módulo de compatibilidade criado no repositório.
-4. Executar build e testes responsivos e, então, fazer o commit da aplicação na `main`.
-
-**Não substituir a versão atual por um frontend recriado a partir apenas de texto e mockups.**
+O registro textual anterior da página está preservado em `docs/sites-current-page-text.txt`.
