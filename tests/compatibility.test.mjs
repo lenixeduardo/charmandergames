@@ -7,10 +7,10 @@ import { detectBrowserCapabilities, detectDeviceKind, evaluateCompatibility, get
 const desktop = { device: "desktop", wasm: true, webgl2: true, webgpu: true };
 const mobile = { ...desktop, device: "mobile" };
 
-test("todos os 38 jogos da versão publicada têm perfis", () => {
-  assert.equal(GAME_PROFILES.length, 38);
+test("38 originais e 5 novos jogos Pokémon têm perfis", () => {
+  assert.equal(GAME_PROFILES.length, 43);
   assert.equal(new Set(GAME_PROFILES.map(p => p.id)).size, GAME_PROFILES.length);
-  assert.equal(GAME_PROFILES.filter(p => p.id.startsWith("pokemon-") && p.platforms.includes("mobile")).length, 6);
+  assert.equal(GAME_PROFILES.filter(p => p.id.startsWith("pokemon-") && p.platforms.includes("mobile")).length, 11);
   assert.ok(GAME_PROFILES.every(p => ["documented", "tentative", "unverified", "basic"].includes(p.verification)));
 });
 
