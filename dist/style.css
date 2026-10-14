@@ -34,3 +34,8 @@ header{height:72px;padding:0 3.2%;gap:16px;border-bottom:0}.brand{font-size:23px
 .pokemon-page .game-card .compat-details summary{font-size:10px}
 @media(max-width:600px){.compat-card{margin:7px 0 9px}.compat-platform,.compat-status{font-size:9px;padding:4px 5px}.compat-content{padding:8px;font-size:10px}.compat-details summary{font-size:10px}.pokemon-card .compat-badges{flex-direction:column;align-items:flex-start}}
 @media(prefers-reduced-motion:reduce){.compat-card *{transition:none!important}}
+
+/* Keep the Pokémon catalogue sidebar aligned after moving emulator exclusively to its tab. */
+.hero--catalog .hero-copy{max-width:610px}
+.pokemon-page .sidebar{margin-top:0}
+@media(max-width:600px){.hero--catalog .hero-copy{max-width:100%}}
