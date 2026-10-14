@@ -335,7 +335,9 @@ $('#apply-ips').onclick=async()=>{
   helper.validateRomForPlatform(original.name,'GBA',original.size);
   if(helper.romExtension(patch.name)!=='ips'||patch.size>16*1024*1024)throw Error('Selecione um patch .ips válido de até 16 MB.');
   $('#ips-status').textContent='Aplicando patch localmente…';
-  const result=helper.applyIpsPatch(await original.arrayBuffer(),await patch.arrayBuffer());
+  const baseBuffer=await original.arrayBuffer();
+  helper.validateRubyBase(baseBuffer);
+  const result=helper.applyIpsPatch(baseBuffer,await patch.arrayBuffer());
   if(blobUrl)URL.revokeObjectURL(blobUrl);
   blobUrl=URL.createObjectURL(new Blob([result],{type:'application/octet-stream'}));
   $('#ips-status').textContent='Patch aplicado. Abrindo Pokémon Jupiter…';
