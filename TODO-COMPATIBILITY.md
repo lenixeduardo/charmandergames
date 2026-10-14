@@ -1,11 +1,12 @@
 # TODO — publicação da compatibilidade no CharmanderGames
 
 - [x] Definir badges independentes de plataforma e verificação local.
-- [x] Mapear 25 jogos da lista inicial, 2048, Hextris, OpenTTD e 6 Pokémon.
+- [x] Mapear os 38 jogos registrados na projeção atual do Sites; conferir nomes exatos pelo teste automatizado.
 - [x] Implementar triagem WebAssembly, WebGL 2, WebGPU e detecção de tipo de dispositivo.
 - [x] Implementar componente React, painel expansível, CSS responsivo e acessibilidade básica.
 - [x] Adicionar testes unitários e workflow GitHub Actions.
-- [ ] **Obter o código-fonte do site já publicado no ChatGPT Sites.** Este repositório estava vazio; a aplicação real não está aqui.
+- [x] Registrar o estado textual da versão publicada no Sites e o catálogo de 38 títulos.
+- [ ] **Obter o código-fonte do site já publicado no ChatGPT Sites.** A aplicação real não está neste repositório.
 - [ ] Importar `GameCompatibilityBadges` no componente compartilhado de card e na página de detalhes do jogo (preservar imagens, favoritos, filtros e rotas atuais).
 - [ ] Cruzar IDs/títulos/URLs **efetivos** do catálogo com os perfis; ampliar aliases de jogos com nomes divergentes.
 - [ ] Confirmar manualmente os hosts externos assinalados como `tentative` ou `unverified`, sem converter resultados desconhecidos em 'compatível'.
