@@ -1,0 +1,163 @@
+{
+  "source": "ChatGPT Sites — Library textual projection, NOT exported application source",
+  "project_id": "appgprj_6acde5f365408191851872c26a9468f9",
+  "live_url": "https://charmandergames.uzinho30.chatgpt.site",
+  "site_source_version_number": 4,
+  "projection_revision": 8,
+  "extracted_at_date": "2026-10-14",
+  "expected_catalog_count": 38,
+  "catalog": [
+    {
+      "name": "Pokémon Red",
+      "site_tag": "GB"
+    },
+    {
+      "name": "Pokémon Yellow",
+      "site_tag": "GB"
+    },
+    {
+      "name": "Pokémon Crystal",
+      "site_tag": "GBC"
+    },
+    {
+      "name": "Pokémon FireRed",
+      "site_tag": "GBA"
+    },
+    {
+      "name": "Pokémon LeafGreen",
+      "site_tag": "GBA"
+    },
+    {
+      "name": "Pokémon Emerald",
+      "site_tag": "GBA"
+    },
+    {
+      "name": "2048",
+      "site_tag": "Web"
+    },
+    {
+      "name": "Hextris",
+      "site_tag": "Web"
+    },
+    {
+      "name": "OpenTTD",
+      "site_tag": "PC"
+    },
+    {
+      "name": "SuperTux",
+      "site_tag": "PC"
+    },
+    {
+      "name": "SuperTuxKart",
+      "site_tag": "PC"
+    },
+    {
+      "name": "Pokémon Crystal — disassembly",
+      "site_tag": "GBC"
+    },
+    {
+      "name": "Pokémon Emerald — expansion",
+      "site_tag": "GBA"
+    },
+    {
+      "name": "BO1 Zombies",
+      "site_tag": "Web"
+    },
+    {
+      "name": "Moon Zombies",
+      "site_tag": "Web"
+    },
+    {
+      "name": "Kino der Toten",
+      "site_tag": "Web"
+    },
+    {
+      "name": "BO3 Cheese Cube",
+      "site_tag": "Web"
+    },
+    {
+      "name": "Black Ops 2",
+      "site_tag": "Web"
+    },
+    {
+      "name": "Modern Warfare 2",
+      "site_tag": "Web"
+    },
+    {
+      "name": "Skate 3",
+      "site_tag": "Web"
+    },
+    {
+      "name": "Skate Rust",
+      "site_tag": "Web"
+    },
+    {
+      "name": "CS Surf",
+      "site_tag": "Web"
+    },
+    {
+      "name": "Halo CE",
+      "site_tag": "Web"
+    },
+    {
+      "name": "Halo CE Mobile",
+      "site_tag": "Web"
+    },
+    {
+      "name": "PES 6",
+      "site_tag": "Web"
+    },
+    {
+      "name": "GTA 5",
+      "site_tag": "Web"
+    },
+    {
+      "name": "GTA Vice City",
+      "site_tag": "Web"
+    },
+    {
+      "name": "The Simpsons: Hit & Run",
+      "site_tag": "Web"
+    },
+    {
+      "name": "Quake 1",
+      "site_tag": "Web"
+    },
+    {
+      "name": "Quake 2",
+      "site_tag": "Web"
+    },
+    {
+      "name": "Quake 3",
+      "site_tag": "Web"
+    },
+    {
+      "name": "Return to Castle Wolfenstein",
+      "site_tag": "Web"
+    },
+    {
+      "name": "Unreal Tournament",
+      "site_tag": "Web"
+    },
+    {
+      "name": "Half-Life",
+      "site_tag": "Web"
+    },
+    {
+      "name": "Half-Life / CS 1.6",
+      "site_tag": "Web"
+    },
+    {
+      "name": "Diablo",
+      "site_tag": "Web"
+    },
+    {
+      "name": "Hedgewars",
+      "site_tag": "Web"
+    },
+    {
+      "name": "GTA / Minecraft e outros",
+      "site_tag": "Web"
+    }
+  ]
+}
