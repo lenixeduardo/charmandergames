@@ -1,4 +1,5 @@
 import test from "node:test";
+import { readFileSync } from "node:fs";
 import assert from "node:assert/strict";
 import { GAME_PROFILES, findGameProfile, normalizeGameId } from "../src/features/gameCompatibility/catalog.mjs";
 import { detectBrowserCapabilities, detectDeviceKind, evaluateCompatibility, getPlatformLabel } from "../src/features/gameCompatibility/compatibility.mjs";
@@ -6,8 +7,8 @@ import { detectBrowserCapabilities, detectDeviceKind, evaluateCompatibility, get
 const desktop = { device: "desktop", wasm: true, webgl2: true, webgpu: true };
 const mobile = { ...desktop, device: "mobile" };
 
-test("todos os 25 títulos da lista inicial e 9 jogos complementares possuem perfis", () => {
-  assert.equal(GAME_PROFILES.length, 34);
+test("todos os 38 jogos da versão publicada têm perfis", () => {
+  assert.equal(GAME_PROFILES.length, 38);
   assert.equal(new Set(GAME_PROFILES.map(p => p.id)).size, GAME_PROFILES.length);
   assert.equal(GAME_PROFILES.filter(p => p.id.startsWith("pokemon-")).length, 6);
   assert.ok(GAME_PROFILES.every(p => ["documented", "tentative", "unverified", "basic"].includes(p.verification)));
@@ -114,4 +115,18 @@ test("falha ao consultar adaptador WebGPU fica como desconhecida", async () => {
   });
   assert.equal(result.webgpu,null);
   assert.equal(evaluateCompatibility("Skate 3",result).status,"setup");
+});
+
+test("os 38 jogos extraídos do Sites têm um perfil reconhecido sem ambiguidade", () => {
+  const snapshot = JSON.parse(readFileSync(new URL("../data/sites-current-catalog.json", import.meta.url), "utf8"));
+  assert.equal(snapshot.catalog.length, 38);
+  assert.equal(snapshot.expected_catalog_count, 38);
+  assert.equal(new Set(snapshot.catalog.map(game => game.name)).size, 38);
+  for (const game of snapshot.catalog) {
+    const profile = findGameProfile(game.name);
+    assert.ok(profile, "Perfil ausente para: " + game.name);
+  }
+  assert.equal(evaluateCompatibility("Pokémon Emerald — expansion", desktop).status, "unknown");
+  assert.equal(evaluateCompatibility("SuperTux", desktop).status, "setup");
+  assert.equal(evaluateCompatibility("SuperTux", mobile).status, "blocked");
 });
