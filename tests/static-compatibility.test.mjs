@@ -10,7 +10,7 @@ const mobile = {...desktop,device:"mobile"};
 
 test("cada um dos 38 cards do Sites tem um perfil correspondente na distribuição", () => {
   assert.equal(catalog.catalog.length,38);
-  assert.equal(GAME_PROFILES.length,38);
+  assert.equal(GAME_PROFILES.length,43);
   for (const {name} of catalog.catalog) {
     const profile=findGameProfile({id:"id-local-alternativo",name});
     assert.ok(profile, "Não existe perfil para "+name);
