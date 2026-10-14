@@ -18,7 +18,7 @@ A fonte de verdade para a importação solicitada é a **versão publicada no Si
 ### Limitações restantes
 
 - O ZIP disponibilizado é uma **exportação estática**, não um projeto React/Vite com JSX/TSX.
-- O módulo de compatibilidade em `src/features/gameCompatibility/` é código separado e **não aparece automaticamente nos cards do `dist/app.js`**.
+- **Atualização:** o módulo de compatibilidade agora foi integrado aos cards em `dist/app.js`, com cópia dos módulos ESM em `dist/compatibility/`. A alteração está no GitHub, mas não foi publicada no Sites.
 - A versão publicada no Sites não foi alterada por este commit; somente o GitHub foi atualizado.
 - Testes reais em diferentes navegadores, especialmente execução de ROMs autorizadas e verificação visual pixel-perfect, continuam pendentes.
 
