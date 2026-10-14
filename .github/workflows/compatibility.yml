@@ -16,5 +16,9 @@ jobs:
       - uses: actions/checkout@v4
       - name: Verificar Node.js
         run: node --version
+      - name: Validar sintaxe da distribuição publicada
+        run: node --check dist/app.js
+      - name: Executar testes das páginas, cards e emulador
+        run: node check.cjs
       - name: Executar testes de compatibilidade
         run: node --test tests/*.test.mjs
