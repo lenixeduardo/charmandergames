@@ -181,9 +181,35 @@ export const GAME_PROFILES = [
   },
   {
     id: "wasm-arcade", title: "GTA / Minecraft (WASM Arcade)",
-    aliases: ["GTA / Minecraft", "WASM Arcade", "GTA Minecraft"],
+    aliases: ["GTA / Minecraft", "WASM Arcade", "GTA Minecraft", "GTA / Minecraft e outros"],
     platforms: ["desktop"], verification: "tentative",
     notes: ["É um agregador: os requisitos variam por título selecionado."],
+  },
+  {
+    id: "supertux", title: "SuperTux",
+    platforms: ["desktop"], verification: "documented",
+    controls: ["Teclado ou controle"],
+    setup: ["Este item do catálogo aponta ao projeto oficial para baixar e instalar o jogo; não é um jogo executado diretamente no portal."],
+    notes: ["Requisitos de hardware e sistema operacional dependem da versão nativa instalada."],
+  },
+  {
+    id: "supertuxkart", title: "SuperTuxKart",
+    platforms: ["desktop"], verification: "documented",
+    controls: ["Teclado ou controle"],
+    setup: ["Este item aponta ao projeto oficial para instalar a versão nativa, e não ao jogo em navegador."],
+    notes: ["A disponibilidade mobile precisa ser avaliada separadamente para Android e iOS; o link deste catálogo está classificado como PC."],
+  },
+  {
+    id: "pokemon-crystal-disassembly", title: "Pokémon Crystal — disassembly",
+    aliases: ["Pokemon Crystal disassembly"],
+    platforms: [], verification: "unverified",
+    notes: ["Este item é um projeto comunitário de código-fonte, não um executável pronto para jogar."],
+  },
+  {
+    id: "pokemon-emerald-expansion", title: "Pokémon Emerald — expansion",
+    aliases: ["Pokemon Emerald expansion"],
+    platforms: [], verification: "unverified",
+    notes: ["Este item é um projeto de ferramentas/modificações de ROM, não um jogo pronto para executar."],
   },
   {
     id: "2048", title: "2048",
