@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { gameCore,romExtension,validateRomForPlatform,validateN64Header,applyIpsPatch } from "../dist/rom-utils.mjs";
+import { gameCore,romExtension,validateRomForPlatform,validateN64Header,validateRubyBase,applyIpsPatch } from "../dist/rom-utils.mjs";
 
 const enc = s => Uint8Array.from([...s].map(c=>c.charCodeAt(0)));
 test("GB/GBC/GBA/N64 são identificados pelo arquivo e pela plataforma",()=>{
@@ -36,4 +36,16 @@ test("patch IPS rejeita dados incompletos e arquivos incompatíveis",()=>{
  assert.throws(()=>applyIpsPatch(Uint8Array.from([1]),enc("PATCH")) ,/Tamanho/);
  assert.throws(()=>applyIpsPatch(Uint8Array.from([1]),Uint8Array.from([...enc("PATCH"),0,0,1,0,2,3])),/truncados/);
  assert.throws(()=>applyIpsPatch(Uint8Array.from([1]),Uint8Array.from([...enc("PATCH"),0,0,1,0,1,3])),/EOF/);
+});
+
+test("Jupiter rejeita ROMs-base que não sejam Pokémon Ruby",()=>{
+ const ruby=new Uint8Array(0xc0);
+ ruby.set(enc("POKEMON RUBY"),0xa0);
+ ruby.set(enc("AXVE"),0xac);
+ assert.equal(validateRubyBase(ruby),true);
+ const emerald=new Uint8Array(0xc0);
+ emerald.set(enc("POKEMON EMER"),0xa0);
+ emerald.set(enc("BPEE"),0xac);
+ assert.throws(()=>validateRubyBase(emerald),/Pokémon Ruby/);
+ assert.throws(()=>validateRubyBase(new Uint8Array(10)),/incompleta/);
 });
