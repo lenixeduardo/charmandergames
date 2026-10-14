@@ -22,6 +22,16 @@ export function validateN64Header(source){
  if(!["80371240","37804012","40123780"].includes(sig))throw new Error("Cabeçalho N64 inválido ou arquivo corrompido.");
  return true;
 }
+/** Validação básica do título e código da ROM-base, não da revisão exata. */
+export function validateRubyBase(source){
+ const bytes=view(source);
+ if(bytes.length<0xb0)throw new Error("ROM-base Pokémon Ruby incompleta.");
+ const title=String.fromCharCode(...bytes.subarray(0xa0,0xac)).replace(/\0/g,"").trim();
+ const code=String.fromCharCode(...bytes.subarray(0xac,0xb0));
+ if(!title.includes("POKEMON RUBY")||!code.startsWith("AXV"))throw new Error("O patch Jupiter exige uma ROM-base original de Pokémon Ruby (GBA), não outro jogo.");
+ return true;
+}
+
 /** Aplica registros IPS padrão, RLE, marcador EOF e truncamento opcional. */
 export function applyIpsPatch(baseSource,patchSource){
  const base=view(baseSource),patch=view(patchSource);
