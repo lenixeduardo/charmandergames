@@ -98,7 +98,14 @@ assert.equal(context.location.hash,'#inicio');
 assert.ok(el('#grid').innerHTML.includes('Quake 1'));
 assert.ok(!el('#grid').innerHTML.includes('Pokémon Red'));
 el('#global-search').input({target:{value:'Expansion'}});
-assert.equal(context.location.hash,'#inicio'); // Searching the normal catalog does not promote ROM projects to games
+assert.equal(context.location.hash,'#mods'); // Source projects stay in ROM Hacks & Mods
+assert.ok(el('#grid').innerHTML.includes('Pokémon Emerald — expansion'));
+el('#global-search').input({target:{value:'Pokemon'}});
+assert.equal(context.location.hash,'#pokemon'); // Search works without Portuguese accents
+assert.ok(el('#grid').innerHTML.includes('Pokémon Red'));
+el('#global-search').input({target:{value:'Quake'}});
+assert.equal(context.location.hash,'#inicio');
+assert.ok(!el('#grid').innerHTML.includes('Pokémon Red'))
 console.log('PASS: global search opens Pokémon section for Pokémon games');
 
 for(const game of run('games')){
