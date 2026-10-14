@@ -12,9 +12,9 @@ Portal estático de jogos clássicos. A versão publicada no ChatGPT Sites foi s
 
 ## Estrutura
 
-`dist/` contém a distribuição publicada, com HTML/CSS/JS estáticos e 48 assets. **Não é um projeto React/Vite**: não há árvore original JSX/TSX. O componente React criado anteriormente permanece em `src/features/gameCompatibility/` como implementação de referência; **ainda não foi integrado ao JavaScript estático publicado**.
+`dist/` contém a distribuição publicada, com HTML/CSS/JS estáticos e 48 assets. **Não é um projeto React/Vite**: não há árvore original JSX/TSX. O JavaScript do catálogo em `dist/app.js` **já inclui badges de plataformas e diagnóstico** para todos os cards, por importação dinâmica de `dist/compatibility/compatibility.mjs`. O componente React continua em `src/features/gameCompatibility/` como referência.
 
-Para integração, portar a triagem de `src/features/gameCompatibility/compatibility.mjs` para os cards gerados por `dist/app.js` ou refatorar o portal inteiro com aprovação separada. Não alterar silenciosamente a versão publicada.
+A integração está feita no código do GitHub e foi validada com `node check.cjs` e `npm test`. **A publicação do projeto no ChatGPT Sites é uma etapa separada e permanece pendente.**
 
 ## Emulador e arquivos
 
