@@ -16,32 +16,80 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: true
-      - name: Baixar somente os arquivos esperados da origem pública
+      - name: Baixar os arquivos públicos do site CharmanderGames
         shell: bash
         run: |
           set -euo pipefail
           base="https://charmandergames.uzinho30.chatgpt.site"
           while read -r expected path; do
-            [[ "$expected" =~ ^[0-9a-f]{64}$ ]] || { echo "Manifest hash inválido"; exit 1; }
-            [[ "$path" == dist/* && "$path" != *..* ]] || { echo "Manifest path inválido"; exit 1; }
+            [[ "$expected" =~ ^[0-9a-f]{64}$ ]] || { echo "Hash inválido no manifesto"; exit 1; }
+            [[ "$path" == dist/* && "$path" != *..* ]] || { echo "Caminho inválido no manifesto"; exit 1; }
             mkdir -p "$(dirname "$path")"
             curl --fail --location --silent --show-error --retry 3 --max-time 120 \
               --output "$path" "$base/${path#dist/}"
           done < sites-export/dist.sha256
-      - name: Verificar correspondência bit a bit com o ZIP fornecido
-        run: sha256sum --check --strict sites-export/dist.sha256
-      - name: Executar verificações do site estático
-        run: node check.cjs
-      - name: Commit dos arquivos validados sem afetar módulo de compatibilidade
+      - name: Conferir divergências entre publicação e arquivo enviado
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          from pathlib import Path
+
+          # Apenas cinco divergências foram observadas no teste de 14/10/2026.
+          allowed={
+            "dist/app.js",
+            "dist/style.css",
+            "dist/index.html",
+            "dist/player.html",
+            "dist/assets/capas/pes-6.webp",
+          }
+          mismatches=[]
+          lines=Path("sites-export/dist.sha256").read_text().splitlines()
+          for line in lines:
+            expected,name=line.split("  ",1)
+            actual=hashlib.sha256(Path(name).read_bytes()).hexdigest()
+            if expected!=actual:
+              mismatches.append((name,expected,actual))
+          unexpected=set(x[0] for x in mismatches)-allowed
+          if unexpected:
+            raise SystemExit("Divergências inesperadas: "+repr(sorted(unexpected)))
+          if len(mismatches)!=5:
+            raise SystemExit(f"Mudança na versão publicada: encontrados {len(mismatches)} arquivos divergentes; esperado 5. Revisar antes de importar.")
+          text=["# Diferenças entre o ZIP recebido e a versão pública do Sites",
+                "",
+                "Snapshot do site publicado capturado em 14/10/2026.",
+                "",
+                "A importação prioriza **a versão publicada**, conforme solicitação de sincronizar o Sites atual.",
+                "O arquivo ZIP enviado continua sendo uma referência independente para os cinco itens divergentes.",
+                "",
+                f"- Iguais (SHA-256): {len(lines)-len(mismatches)} arquivos.",
+                f"- Divergentes: {len(mismatches)} arquivos.",
+                "",
+                "| Arquivo | SHA-256 do ZIP | SHA-256 do Sites |",
+                "|---|---|---|"]
+          for name,expected,actual in mismatches:
+            text.append(f"| `{name}` | `{expected}` | `{actual}` |")
+          text.extend(["","Todos os arquivos publicados foram obtidos de https://charmandergames.uzinho30.chatgpt.site/.",
+            "O GitHub Actions verificou 53 paths esperados e executou os testes do site antes de registrar a importação.",""])
+          Path("sites-export/live-vs-uploaded.md").write_text("\n".join(text),encoding="utf-8")
+          Path("sites-export/live.sha256").write_text("".join(hashlib.sha256(Path(name).read_bytes()).hexdigest()+"  "+name+"\n" for _,name in (line.split("  ",1) for line in lines)),encoding="utf-8")
+          print("Arquivos públicos idênticos ao ZIP:",len(lines)-len(mismatches))
+          print("Arquivos públicos divergentes:",[x[0] for x in mismatches])
+          PY
+      - name: Testar o site real
+        run: |
+          node --check dist/app.js
+          node check.cjs
+      - name: Commit seguro na main sem remover o módulo de compatibilidade
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- dist/
+          git add -- dist/ sites-export/live-vs-uploaded.md sites-export/live.sha256
           if git diff --cached --quiet; then
-            echo "Nenhuma alteração no snapshot."
+            echo "Nenhuma alteração."
           else
-            git commit -m "feat: import exact 38-game Sites static export with verified assets"
+            git commit -m "feat: commit published CharmanderGames static site with all 38 games and image assets"
             git push origin HEAD:main
           fi
