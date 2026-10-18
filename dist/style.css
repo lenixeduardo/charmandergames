@@ -57,3 +57,10 @@ header{height:72px;padding:0 3.2%;gap:16px;border-bottom:0}.brand{font-size:23px
 .ips-fields .btn{min-height:42px}
 #ips-status{margin-top:12px}
 @media(max-width:600px){.ips-tools{padding:15px}.ips-fields{flex-direction:column;align-items:stretch}.ips-fields label{flex:1 1 auto}.rom-card-note{font-size:10px}}
+
+/* Upload local de ROM: seletor nativo visível e acessível em desktop/mobile. */
+#rom-file{display:block;width:100%;max-width:420px;margin:8px auto 14px;padding:10px;background:#fff;border:1px solid #e2d8d3;border-radius:8px;color:#29313c;font:500 12px Inter,system-ui,sans-serif}
+#rom-file::file-selector-button{margin-right:12px;padding:11px 14px;border:0;border-radius:7px;background:#ff511e;color:#fff;font:600 12px Inter,system-ui,sans-serif;cursor:pointer}
+#rom-file:hover::file-selector-button{background:#df4518}
+#rom-file:focus-visible{outline:2px solid #ed5525;outline-offset:3px}
+@media(max-width:600px){#rom-file{font-size:11px;max-width:100%}#rom-file::file-selector-button{margin-right:8px;padding:10px;font-size:11px}}
