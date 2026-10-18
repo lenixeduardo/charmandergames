@@ -67,3 +67,22 @@ header{height:72px;padding:0 3.2%;gap:16px;border-bottom:0}.brand{font-size:23px
 
 /* Curadoria do catálogo mobile */
 .game-card .admin-recommended{position:absolute;left:12px;bottom:12px;z-index:3;max-width:calc(100% - 24px);padding:7px 10px;border-radius:6px;background:#fff;color:#1d314e;font-size:11px;font-weight:800;line-height:1.2;box-shadow:0 2px 10px rgba(0,0,0,.18)}
+
+/* Brand asset: official CharmanderGames horizontal logo */
+.brand{display:inline-flex;align-items:center;gap:0;line-height:0}
+.brand img{display:block;width:250px;height:auto;max-height:58px;object-fit:contain;object-position:left center}
+header .brand{flex:0 0 auto}
+footer .brand img{width:190px;height:auto;max-height:48px}
+@media(max-width:1390px) and (min-width:1001px){
+  header .brand img{width:220px;max-height:54px}
+}
+@media(max-width:1000px){
+  header .brand img{width:210px;max-height:52px}
+}
+@media(max-width:600px){
+  header .brand img{width:200px;height:auto;max-height:48px}
+  footer .brand img{width:170px;height:auto;max-height:42px}
+}
+@media(max-width:390px){
+  header .brand img{width:175px;max-height:44px}
+}
