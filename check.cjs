@@ -1,4 +1,15 @@
 const fs=require('fs'),vm=require('vm'),assert=require('assert');
+// A logo can exist in Git while being truncated and unreadable in production.
+const indexHtml=fs.readFileSync('dist/index.html','utf8');
+const logoPath='dist/assets/charmandergames-logo-horizontal-v2.webp';
+const logoData=fs.readFileSync(logoPath);
+assert.equal(logoData.toString('ascii',0,4),'RIFF','Invalid WebP RIFF signature');
+assert.equal(logoData.toString('ascii',8,12),'WEBP','Invalid WebP file format');
+assert.equal(logoData.readUInt32LE(4)+8,logoData.length,'Truncated WebP logo asset');
+assert.equal(indexHtml.split('assets/charmandergames-logo-horizontal-v2.webp').length-1,2,'Logo not applied to both header and footer');
+assert.ok(!indexHtml.includes('assets/charmandergames-logo-horizontal.webp'),'Old broken logo still referenced');
+console.log('PASS: header/footer reference the intact, cache-busted WebP logo');
+
 const elements=new Map();
 const el=s=>{
   if(!elements.has(s)){
