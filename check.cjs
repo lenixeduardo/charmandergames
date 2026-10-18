@@ -41,6 +41,9 @@ assert.ok(el('#grid').innerHTML.includes('noopener noreferrer'));
 assert.ok(fs.existsSync('dist/assets/demon-slayer-hinokami-chronicles.webp'));
 console.log('PASS: Demon Slayer card uses the uploaded cover and opens its external page safely');
 assert.ok(el('#grid').innerHTML.includes('Bloodborne'));
+assert.ok(el('#grid').innerHTML.includes('bloodborne-cover.jpg'));
+assert.ok(fs.existsSync('dist/assets/bloodborne-cover.jpg'));
+
 assert.ok(el('#grid').innerHTML.includes('https://fitgirl-repacks.site/bloodborne/'));
 assert.ok(el('#grid').innerHTML.includes('Abrir página externa'));
 console.log('PASS: Bloodborne card opens the configured external page safely');
