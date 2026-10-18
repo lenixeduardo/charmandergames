@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { gameCore,romExtension,validateRomForPlatform,validateN64Header,validateRubyBase,applyIpsPatch } from "../dist/rom-utils.mjs";
+import { gameCore,romExtension,platformForRomName,validateRomForPlatform,validateN64Header,validateRubyBase,applyIpsPatch } from "../dist/rom-utils.mjs";
 
 const enc = s => Uint8Array.from([...s].map(c=>c.charCodeAt(0)));
 test("GB/GBC/GBA/N64 são identificados pelo arquivo e pela plataforma",()=>{
@@ -14,6 +14,14 @@ test("GB/GBC/GBA/N64 são identificados pelo arquivo e pela plataforma",()=>{
  assert.throws(()=>validateRomForPlatform("Stadium.zip","N64",100),/Descompacte/);
  assert.throws(()=>validateRomForPlatform("Jupiter.ips","GBA",100),/Descompacte/);
  assert.throws(()=>validateRomForPlatform("Stadium.z64","N64",0),/vazia/);
+});
+test("upload seleciona o núcleo GBA automaticamente pela extensão, mesmo sem jogo pré-selecionado",()=>{
+ for(const [file,platform,core] of [["meu-jogo.gba","GBA","gba"],["POKEMON.GBA","GBA","gba"],["Crystal.gbc","GBC","gb"],["Red.gb","GB","gb"],["Stadium.z64","N64","n64"]]){
+  assert.equal(platformForRomName(file),platform);
+  assert.equal(validateRomForPlatform(file,platform,1024),core);
+ }
+ assert.throws(()=>platformForRomName("arquivo.zip"),/descompactada/);
+ assert.throws(()=>platformForRomName("patch.ips"),/não suportado/);
 });
 test("N64 valida assinatura ROM .z64, .n64 e .v64",()=>{
  for(const data of [[0x80,0x37,0x12,0x40],[0x37,0x80,0x40,0x12],[0x40,0x12,0x37,0x80]])assert.equal(validateN64Header(Uint8Array.from(data)),true);
