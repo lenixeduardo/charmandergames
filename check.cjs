@@ -23,13 +23,13 @@ vm.runInContext(fs.readFileSync('dist/app.js','utf8'),context);
 const run=s=>vm.runInContext(s,context);
 const route=name=>{context.location.hash='#'+name;run("query='';platform='Todos';onlyFavorites=false;render()")};
 
-assert.equal(run('games.length'),45);
-assert.equal(run("page='inicio';filtered().length"),32);
+assert.equal(run('games.length'),46);
+assert.equal(run("page='inicio';filtered().length"),33);
 assert.equal(run("filtered().some(g=>g.name.startsWith('Pokémon'))"),false);
 assert.equal(run("page='pokemon';filtered().length"),11);
 assert.equal(run("page='online';filtered().length"),27);
 assert.equal(run("page='mods';filtered().length"),2);
-assert.equal(run("page='downloads';filtered().length"),5);
+assert.equal(run("page='downloads';filtered().length"),6);
 assert.equal(run("page='emulador';filtered().length"),0);
 console.log('PASS: home excludes Pokémon; games remain in dedicated category pages');
 
@@ -40,6 +40,10 @@ assert.ok(el('#grid').innerHTML.includes('Abrir página externa'));
 assert.ok(el('#grid').innerHTML.includes('noopener noreferrer'));
 assert.ok(fs.existsSync('dist/assets/demon-slayer-hinokami-chronicles.webp'));
 console.log('PASS: Demon Slayer card uses the uploaded cover and opens its external page safely');
+assert.ok(el('#grid').innerHTML.includes('Bloodborne'));
+assert.ok(el('#grid').innerHTML.includes('https://fitgirl-repacks.site/bloodborne/'));
+assert.ok(el('#grid').innerHTML.includes('Abrir página externa'));
+console.log('PASS: Bloodborne card opens the configured external page safely');
 
 for(const name of ['inicio','online','pokemon','mods','downloads','emulador']){
   route(name);
