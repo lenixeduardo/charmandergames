@@ -7,7 +7,13 @@ function view(source){
  throw new TypeError("Use ArrayBuffer ou Uint8Array.");
 }
 export function gameCore(platform){return platform==="N64"?"n64":platform==="GBA"?"gba":"gb";}
-export function romExtension(name){return String(name).split(".").pop().toLowerCase();}
+export function romExtension(name){return String(name).split(".").pop().trim().toLowerCase();}
+export function platformForRomName(name){
+ const extensions={gba:"GBA",gbc:"GBC",gb:"GB",z64:"N64",n64:"N64",v64:"N64"};
+ const platform=extensions[romExtension(name)];
+ if(!platform)throw new Error("Formato de ROM não suportado. Escolha uma ROM descompactada .gba, .gb, .gbc, .z64, .n64 ou .v64.");
+ return platform;
+}
 export function validateRomForPlatform(name,platform,size){
  const extension=romExtension(name);
  const allowed=platform==="N64"?["z64","n64","v64"]:platform==="GBA"?["gba"]:platform==="GBC"?["gbc"]:platform==="GB"?["gb"]:[];
