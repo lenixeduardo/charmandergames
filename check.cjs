@@ -23,15 +23,23 @@ vm.runInContext(fs.readFileSync('dist/app.js','utf8'),context);
 const run=s=>vm.runInContext(s,context);
 const route=name=>{context.location.hash='#'+name;run("query='';platform='Todos';onlyFavorites=false;render()")};
 
-assert.equal(run('games.length'),43);
-assert.equal(run("page='inicio';filtered().length"),30);
+assert.equal(run('games.length'),45);
+assert.equal(run("page='inicio';filtered().length"),32);
 assert.equal(run("filtered().some(g=>g.name.startsWith('Pokémon'))"),false);
 assert.equal(run("page='pokemon';filtered().length"),11);
 assert.equal(run("page='online';filtered().length"),27);
 assert.equal(run("page='mods';filtered().length"),2);
-assert.equal(run("page='downloads';filtered().length"),3);
+assert.equal(run("page='downloads';filtered().length"),5);
 assert.equal(run("page='emulador';filtered().length"),0);
 console.log('PASS: home excludes Pokémon; games remain in dedicated category pages');
+
+route('downloads');
+assert.ok(el('#grid').innerHTML.includes('Demon Slayer: Kimetsu no Yaiba'));
+assert.ok(el('#grid').innerHTML.includes('demon-slayer-hinokami-chronicles.webp'));
+assert.ok(el('#grid').innerHTML.includes('Abrir página externa'));
+assert.ok(el('#grid').innerHTML.includes('noopener noreferrer'));
+assert.ok(fs.existsSync('dist/assets/demon-slayer-hinokami-chronicles.webp'));
+console.log('PASS: Demon Slayer card uses the uploaded cover and opens its external page safely');
 
 for(const name of ['inicio','online','pokemon','mods','downloads','emulador']){
   route(name);
@@ -126,4 +134,4 @@ for(const game of run('games')){
 }
 const player=fs.readFileSync('dist/player.html','utf8').match(/<script>([\s\S]*?)<\/script>/)[1];
 new vm.Script(player);
-console.log('PASS: 43 cards keep browser compatibility badges; player script syntax valid');
+console.log('PASS: all cards keep browser compatibility badges; player script syntax valid');
